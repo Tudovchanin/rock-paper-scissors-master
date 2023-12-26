@@ -90,16 +90,16 @@ function finalGame(user) {
 // Функция определяющая победителя
 function winnerInitialization(user, pcChip) {
 	const arrResult = ['КРАСАВА', 'СОБЕРИСЬ ПАДАВАН', 'НИЧЬЯ'];
-	if (user === rock && pcChip === scissors || user === paper && pcChip === rock || user === scissors && pcChip === paper) {
+
+	if (pcChip === user) {
+		setTimeout(showResult, 4000, arrResult[2]);
+	}
+	else if (user === rock && pcChip === scissors || user === paper && pcChip === rock || user === scissors && pcChip === paper) {
 		setTimeout(showResult, 4000, arrResult[0]);
 		scoreUser += 1;
-	}
-	else if (pcChip === rock && user === scissors || pcChip === paper && user === rock || pcChip === scissors && user === paper) {
+	} else {
 		setTimeout(showResult, 4000, arrResult[1]);
 		scorePc += 1;
-	}
-	else if (pcChip === user) {
-		setTimeout(showResult, 4000, arrResult[2]);
 	}
 }
 // Показывает результат ,кнопку игры ,счет
