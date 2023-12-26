@@ -1,0 +1,502 @@
+:root {
+	--Dark-Text: hsl(229, 25%, 31%);
+	--Score-Text: hsl(229, 64%, 46%);
+	--Header-Outline: hsl(217, 16%, 45%);
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	background: url("images/galaktika_zemlia_set_126341_1920x1080.jpg") no-repeat;
+	background-size: cover;
+	display: grid;
+	justify-items: center;
+	min-height: 100vh;
+	font-family: "Barlow Semi Condensed";
+	color: wheat;
+}
+/* ----------------------------------------------------------- */
+/* фишки: ножницы, камень, бумага */
+.rock {
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+	background-image: radial-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+	-webkit-box-shadow: 0px -9px 5px 0px rgba(34, 60, 80, 0.6) inset;
+	-moz-box-shadow: 0px -9px 5px 0px rgba(34, 60, 80, 0.6) inset;
+	box-shadow: 0px -9px 5px 0px rgba(120, 5, 24, 0.908) inset;
+}
+.paper {
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	width: 150px;
+	height: 150px;
+	background-image: radial-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
+	-webkit-box-shadow: 0px -9px 5px 0px rgba(34, 60, 80, 0.6) inset;
+	-moz-box-shadow: 0px -9px 5px 0px rgba(34, 60, 80, 0.6) inset;
+	box-shadow: 0px -9px 5px 0px rgba(51, 5, 120, 0.908) inset;
+	border-radius: 100%;
+}
+.scissors {
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+	background-image: radial-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
+	-webkit-box-shadow: 0px -9px 5px 0px rgba(34, 60, 80, 0.6) inset;
+	-moz-box-shadow: 0px -9px 5px 0px rgba(34, 60, 80, 0.6) inset;
+	box-shadow: 0px -9px 5px 0px rgba(91, 120, 5, 0.908) inset;
+}
+.rock::before,
+.paper::before,
+.scissors::before {
+	content: "";
+	width: 120px;
+	height: 120px;
+	background-color: aliceblue;
+	position: absolute;
+	border-radius: 50%;
+	box-shadow: 0px 5px 10px 2px rgb(204, 199, 199) inset;
+}
+.scissors img,
+.rock img,
+.paper img {
+	z-index: 2;
+}
+/* ----------------------------------------------------------- */
+
+/* ----------------------------------------------------------- */
+/* шапка игры */
+.head {
+	align-self: center;
+	justify-self: center;
+	display: flex;
+	justify-content: space-between;
+	width: 700px;
+	border: solid var(--Header-Outline);
+	border-radius: 10px;
+}
+.title {
+	color: aliceblue;
+	margin: 10px;
+}
+.score {
+	background-color: rgb(245, 242, 239);
+	display: grid;
+	justify-items: center;
+	padding: 10px 30px 0 30px;
+	font-weight: 700;
+	color: var(--Dark-Text);
+	border-radius: 10px;
+	margin: 10px;
+}
+.count {
+	font-size: 60px;
+}
+/* ----------------------------------------------------------- */
+
+/* ----------------------------------------------------------- */
+/* Анимация общего игрового стола */
+.gaming-table {
+	-webkit-animation-name: gaming-table;
+	animation-name: gaming-table;
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+@-webkit-keyframes gaming-table {
+	0% {
+		-webkit-transform-origin: center;
+		transform-origin: center;
+		-webkit-transform: rotate3d(0, 0, 1, -200deg);
+		transform: rotate3d(0, 0, 1, -200deg);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform-origin: center;
+		transform-origin: center;
+		-webkit-transform: none;
+		transform: none;
+		opacity: 1;
+	}
+}
+@keyframes gaming-table {
+	0% {
+		-webkit-transform-origin: center;
+		transform-origin: center;
+		-webkit-transform: rotate3d(0, 0, 1, -200deg);
+		transform: rotate3d(0, 0, 1, -200deg);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform-origin: center;
+		transform-origin: center;
+		-webkit-transform: none;
+		transform: none;
+		opacity: 1;
+	}
+}
+/* ----------------------------------------------------------- */
+
+/* ----------------------------------------------------------- */
+/* Начальный игровой стол .start-game-container */
+.start-game-container {
+	position: relative;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	width: 400px;
+	height: 450px;
+	transition: 1s;
+	opacity: 1;
+	margin-top: 50px;
+}
+.triangle-container {
+	width: min-content;
+}
+/* Фишки начального игрового стола ,позиционируются относительно .start-game-container {
+	position: relative};  */
+.start-game-container .rock {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	z-index: 1;
+}
+.start-game-container .paper {
+	position: absolute;
+	cursor: pointer;
+	z-index: 1;
+	bottom: 85px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.start-game-container .scissors {
+	position: absolute;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+	z-index: 1;
+}
+.start-game-container .paper:hover::before {
+	background-color: rgba(255, 255, 255, 0.742);
+}
+.start-game-container .scissors:hover::before {
+	background-color: rgba(255, 255, 255, 0.742);
+}
+.start-game-container .rock:hover::before {
+	background-color: rgba(255, 255, 255, 0.741);
+}
+/* ----------------------------------------------------------- */
+
+/* ---------------------------------------------------------- */
+/* Общий игровой стол  */
+.gaming-table {
+	position: relative;
+}
+/* финальный игровой стол , позиционируется оносительно общего стола .gaming-table */
+.result-container {
+	height: 400px;
+	width: 400px;
+	position: absolute;
+	top: 0;
+	display: grid;
+	grid-template-columns: min-content max-content min-content;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: 1s;
+}
+.user-response-container,
+.pc-response-container {
+	display: grid;
+	position: relative;
+}
+.user-icon {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	opacity: 0;
+	transition: 0.5s;
+}
+.pc-icon {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	opacity: 0;
+	transition: 0.5s;
+}
+.position-response {
+	height: 150px;
+	width: 150px;
+	background-color: darkslategray;
+	border-radius: 100%;
+	-webkit-box-shadow: 0px 0px 45px 2px rgba(2, 11, 19, 0.74);
+	-moz-box-shadow: 0px 0px 45px 2px rgba(2, 11, 19, 0.74);
+	box-shadow: 0px 0px 45px 2px rgba(2, 11, 19, 0.74);
+}
+/* результат игры */
+.win-lose-container {
+	transition: 5s;
+}
+.result-win-lose {
+	text-align: center;
+	transition: 5s;
+	font-size: 0;
+	color: blanchedalmond;
+	font-family: "Rubik Doodle Shadow", sans-serif;
+}
+/* кнопка играть заново */
+.play-again {
+	background-color: aliceblue;
+	text-align: center;
+	border-radius: 10px;
+	font-size: 16px;
+	color: brown;
+	display: none;
+	width: max-content;
+}
+.active-play-again {
+	display: block;
+	padding: 20px 80px;
+	margin: 0 auto;
+	cursor: pointer;
+}
+.active-result-win-lose {
+	font-size: 32px;
+	padding: 20px 20px;
+}
+/* текст над фишками ,финального игрового стола */
+.pc-picked {
+	position: absolute;
+	white-space: nowrap;
+	top: -50%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.user-picked {
+	position: absolute;
+	top: -50%;
+	left: 50%;
+	transform: translateX(-50%);
+	white-space: nowrap;
+}
+/* ----------------------------------------------------------- */
+
+/* ----------------------------------------------------------- */
+/* Карточка правил игры */
+/* кнопка правила, для показа правил игры */
+.rules-btn {
+	justify-self: end;
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	border: solid;
+	width: 100px;
+	height: 50px;
+	margin-right: 20px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.rules-btn:hover {
+	background-color: rgba(168, 156, 233, 0.453);
+}
+.rules-btn:active {
+	border: solid 5px white;
+}
+/* табличка с правилами игры */
+.rules-container {
+	display: none;
+	position: absolute;
+	border-radius: 10px;
+	align-self: center;
+	background-color: aliceblue;
+	transition: 1s;
+	grid-template-columns: 1fr 1fr;
+	width: min-content;
+	padding: 40px;
+}
+.rules {
+	font-size: 32px;
+	color: var(--Dark-Text);
+	font-weight: 700;
+}
+.icone-close {
+	align-self: center;
+	cursor: pointer;
+}
+.rules-img {
+	padding-left: 20px;
+	padding-top: 40px;
+}
+/* ----------------------------------------------------------- */
+
+/* ----------------------------------------------------------- */
+/* Модификаторы */
+.hide-start-table {
+	opacity: 0;
+}
+.active {
+	display: grid;
+	opacity: 1;
+	z-index: 3333;
+}
+.active-play-again {
+	display: block;
+	padding: 20px 80px;
+	margin: 0 auto;
+	cursor: pointer;
+}
+.active-result-win-lose {
+	font-size: 32px;
+	padding: 20px 20px;
+}
+/* ссылка на  сайт Frontend Mentor */
+.attribution {
+	align-self: flex-end;
+}
+/* ----------------------------------------------------------- */
+@media (max-width: 768px) {
+	.head {
+		width: 500px;
+		height: 100px;
+	}
+	.title img {
+		height: 80px;
+	}
+	.count {
+		font-size: 32px;
+	}
+	.result-container {
+		grid-template-columns: 10% 35% 10%;
+		justify-items: center;
+	}
+	.win-lose-container {
+		align-self: end;
+	}
+	.user-response-container,
+	.pc-response-container {
+		top: -60px;
+	}
+	.active-result-win-lose {
+		font-size: 24px;
+	}
+	.pc-picked,
+	.user-picked {
+		top: 110%;
+	}
+	.rules-btn {
+		justify-self: center;
+		margin: 0;
+	}
+}
+@media (max-width: 542px) {
+	.head {
+		width: 400px;
+	}
+}
+@media (max-width: 440px) {
+	.head {
+		width: 345px;
+	}
+	.title img {
+		height: 80px;
+	}
+	.count {
+		font-size: 32px;
+	}
+	.start-game-container {
+		width: 250px;
+		height: 300px;
+	}
+	.triangle-container img {
+		width: 200px;
+	}
+	.start-game-container .paper {
+		bottom: 60px;
+	}
+	.result-container {
+		width: 250px;
+		height: 330px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	.position-response {
+		height: 100px;
+		width: 100px;
+	}
+	.active-result-win-lose {
+		font-size: 28px;
+		width: 100vw;
+		padding: 20px 12px 5px;
+	}
+	.rock,
+	.scissors,
+	.paper {
+		width: 100px;
+		height: 100px;
+	}
+	.rock::before,
+	.scissors::before,
+	.paper::before {
+		width: 80px;
+		height: 80px;
+	}
+	.rock img,
+	.scissors img,
+	.paper img {
+		width: 30px;
+	}
+	.rules-container {
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 0;
+		height: 100vh;
+		grid-template-columns: 1fr;
+		justify-items: center;
+		border-radius: 0;
+	}
+	.icone-close {
+		order: 3;
+		margin-bottom: 50px;
+	}
+	.rules-img {
+		padding-left: 0;
+		padding-top: 0;
+		margin-bottom: 50px;
+	}
+	.rules {
+		align-self: flex-end;
+		margin-bottom: 100px;
+	}
+}
+@media (max-width: 375px) {
+	.head {
+		width: 250px;
+		height: 100px;
+	}
+	.score {
+		padding: 0;
+		margin-right: 20px;
+		padding: 0 12px;
+	}
+	.title img {
+		height: 65px;
+	}
+	.count {
+		font-size: 24px;
+	}
+	.rules-img img {
+		width: 200px;
+	}
+}
